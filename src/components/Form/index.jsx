@@ -14,8 +14,51 @@ import { connect } from "react-redux";
 import { calcTotal, formatPrice } from "../../utils";
 import { useNavigate } from "react-router-dom";
 
+const options = ["F", "M", "Outro"];
+
+const renderTextField = ({
+  input,
+  label,
+  meta: { touched, error },
+  ...custom
+}) => (
+  <div>
+    <TextField
+      label={label}
+      error={touched && error}
+      helperText={touched && error}
+      {...input}
+      {...custom}
+    />
+  </div>
+);
+
+const renderAutocomplete = ({
+  input,
+  label,
+  meta: { touched, error },
+  ...custom
+}) => (
+  <div>
+    <Autocomplete
+      {...input}
+      {...custom}
+      disablePortal
+      options={options}
+      onChange={(event, value) => input.onChange(value)}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          label={label}
+          error={touched && error}
+          helperText={touched && error}
+        />
+      )}
+    />
+  </div>
+);
+
 function Form({ products, saveUserData, handleSubmit }) {
-  const options = ["F", "M", "Outro"];
   const navigate = useNavigate();
   const total = calcTotal(products);
 
@@ -28,46 +71,6 @@ function Form({ products, saveUserData, handleSubmit }) {
     }
   }
 
-  const renderTextField = ({
-    input,
-    label,
-    meta: { touched, error },
-    ...custom
-  }) => (
-    <div>
-      <TextField
-        label={label}
-        error={touched && error}
-        helperText={touched && error}
-        {...input}
-        {...custom}
-      />
-    </div>
-  );
-
-  const renderAutocomplete = ({
-    input,
-    label,
-    meta: { touched, error },
-    ...custom
-  }) => (
-    <div>
-      <Autocomplete
-        {...input}
-        {...custom}
-        disablePortal
-        options={options}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label={label}
-            error={touched && error}
-            helperText={touched && error}
-          />
-        )}
-      />
-    </div>
-  );
   return (
     <Box mt={4}>
       <form onSubmit={handleSubmit(handlePurchase)}>

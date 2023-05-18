@@ -6,12 +6,13 @@ import { Price } from "./styles";
 import { connect } from "react-redux";
 import { calcTotal, formatPrice } from "../../utils";
 
-function FinalizedPage({products, user}) {
+function FinalizedPage({ products, user }) {
   const navigate = useNavigate();
 
-  const total = calcTotal(products)
+  const total = calcTotal(products);
 
   function goBack() {
+    products.count = 0;
     return navigate("/");
   }
   return (
