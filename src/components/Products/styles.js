@@ -2,8 +2,11 @@ import styled from "@emotion/styled";
 import { Card } from "@mui/material";
 
 export const CardCustom = styled(Card)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding-top: 1rem;
-  max-height: 25rem;
+  max-height: 25.5rem;
 
   &:hover {
     box-shadow: 0px 0px 4px 3px #cecece;
@@ -15,6 +18,7 @@ export const CardCustom = styled(Card)`
   }
 
   .content {
+    width: 100%;
     background: rgba(255, 255, 255, 0.6);
   }
 `;
@@ -23,7 +27,7 @@ export const ContentHidden = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  transform: translateY(25%);
+  transform: translateY(35%);
 `;
 
 export const ProductAction = styled.div`

@@ -7,9 +7,9 @@ export default function Home() {
   return (
     <Container maxWidth="lg">
       <Box my={4}>
-        <Header children="Produtos" />
+        <Header title="Produtos" />
         <Products />
-        <Header children="Dados do Cliente" />
+        <Header title="Dados do Cliente" />
         <Form />
       </Box>
     </Container>

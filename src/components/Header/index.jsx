@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 
-export default function Header({children}) {
+export default function Header({title}) {
     return (
         <Typography
             variant="h4"
@@ -9,7 +9,7 @@ export default function Header({children}) {
             borderColor="lightgray"
             lineHeight={2}
         >
-            {children}
+            {title}
         </Typography>
     )
 }

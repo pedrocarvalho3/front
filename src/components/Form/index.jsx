@@ -9,10 +9,11 @@ import {
 } from "@mui/material";
 import { reduxForm, Field } from "redux-form";
 import { bindActionCreators } from "redux";
-import * as Actions from "../../store/actions";
 import { connect } from "react-redux";
-import { calcTotal, formatPrice } from "../../utils";
 import { useNavigate } from "react-router-dom";
+
+import {saveUserData} from "../../store/actions";
+import { calcTotal, formatPrice } from "../../utils";
 
 const options = ["F", "M", "Outro"];
 
@@ -123,7 +124,7 @@ const mapStateToProps = (state) => ({
   products: state.products,
 });
 
-const mapDispatchToProps = (dispatch) => bindActionCreators(Actions, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators(saveUserData, dispatch);
 
 export default connect(
   mapStateToProps,

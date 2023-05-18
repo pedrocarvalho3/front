@@ -1,20 +1,26 @@
-import { Box, Button, Typography } from "@mui/material";
-
-import purchase from "../../assets/purchase.png";
+import { Box, Button, Typography, useMediaQuery } from "@mui/material";
+import { bindActionCreators } from "redux";
 import { useNavigate } from "react-router-dom";
-import { Price } from "./styles";
 import { connect } from "react-redux";
+import { useTheme } from "@mui/material/styles";
+import { resetCount } from "../../store/actions";
 import { calcTotal, formatPrice } from "../../utils";
+import { Price } from "./styles";
+import purchase from "../../assets/purchase.png";
 
-function FinalizedPage({ products, user }) {
+function FinalizedPage({ products, user, resetCount }) {
   const navigate = useNavigate();
+  const theme = useTheme();
+  const isWidthMd = useMediaQuery(theme.breakpoints.down("md"));
+  const isWidthSm = useMediaQuery(theme.breakpoints.down("sm"));
 
   const total = calcTotal(products);
 
   function goBack() {
-    products.count = 0;
+    resetCount();
     return navigate("/");
   }
+
   return (
     <Box
       sx={{
@@ -23,6 +29,7 @@ function FinalizedPage({ products, user }) {
         justifyContent: "center",
         backgroundColor: "lightgray",
         height: "100vh",
+        padding: isWidthMd ? "2rem" : 0,
       }}
     >
       <Box
@@ -32,21 +39,26 @@ function FinalizedPage({ products, user }) {
           alignItems: "center",
           textAlign: "center",
           backgroundColor: "white",
-          padding: "4rem",
+          padding: isWidthSm ? "100%" : "4rem",
         }}
       >
-        <Typography variant="h5" fontWeight={700}>
+        <Typography variant="h4" fontWeight={700}>
           {user.name},
         </Typography>
-        <Typography variant="subtitle1" fontWeight={700}>
+        <Typography variant="h6" fontWeight={700}>
           Sua compra no valor de <Price>{formatPrice(total)}</Price>
           <br />
           foi finalizada com sucesso
         </Typography>
         <Box m={4} mr={2} alignItems="center">
-          <img src={purchase} alt="" width="150rem" />
+          <img src={purchase} alt="" width={180} />
         </Box>
-        <Button variant="contained" color="warning" onClick={goBack}>
+        <Button
+          size="large"
+          variant="contained"
+          color="warning"
+          onClick={goBack}
+        >
           INICIAR NOVA COMPRA
         </Button>
       </Box>
@@ -59,4 +71,7 @@ const mapStateToProps = (state) => ({
   user: state.user,
 });
 
-export default connect(mapStateToProps)(FinalizedPage);
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({ resetCount }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(FinalizedPage);

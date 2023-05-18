@@ -11,6 +11,8 @@ export default function products(state = initialState, action) {
           : item
       );
       return newItems;
+      case "RESET_COUNT":
+        return initialState;
     default:
       return state;
   }

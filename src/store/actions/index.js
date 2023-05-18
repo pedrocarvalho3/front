@@ -3,6 +3,10 @@ export const updateCount = (id, count) => ({
     payload: { id, count }
 })
 
+export const resetCount = (id, count) => ({
+    type: 'RESET_COUNT',
+})
+
 export const saveUserData = (data) => ({
     type: 'SAVE_USER_DATA',
     payload: data
