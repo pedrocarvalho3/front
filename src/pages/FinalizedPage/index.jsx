@@ -3,6 +3,7 @@ import { bindActionCreators } from "redux";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { useTheme } from "@mui/material/styles";
+
 import { resetCount } from "../../store/actions";
 import { calcTotal, formatPrice } from "../../utils";
 import { Price } from "./styles";
