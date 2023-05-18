@@ -20,6 +20,8 @@ function FinalizedPage({ products, user, resetCount }) {
     return navigate("/");
   }
 
+  let imageWidth = isWidthMd ? 140 : 180;
+
   return (
     <Box
       sx={{
@@ -49,7 +51,7 @@ function FinalizedPage({ products, user, resetCount }) {
           foi finalizada com sucesso
         </Typography>
         <Box m={4} mr={2} alignItems="center">
-          <img src={purchase} alt="" width={180} />
+          <img src={purchase} alt="" width={imageWidth} />
         </Box>
         <Button
           size="large"
