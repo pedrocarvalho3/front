@@ -12,7 +12,6 @@ function FinalizedPage({ products, user, resetCount }) {
   const navigate = useNavigate();
   const theme = useTheme();
   const isWidthMd = useMediaQuery(theme.breakpoints.down("md"));
-  const isWidthSm = useMediaQuery(theme.breakpoints.down("sm"));
 
   const total = calcTotal(products);
 
@@ -27,9 +26,8 @@ function FinalizedPage({ products, user, resetCount }) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "lightgray",
+        backgroundColor: "#F5F5F5",
         height: "100vh",
-        padding: isWidthMd ? "2rem" : 0,
       }}
     >
       <Box
@@ -39,7 +37,7 @@ function FinalizedPage({ products, user, resetCount }) {
           alignItems: "center",
           textAlign: "center",
           backgroundColor: "white",
-          padding: isWidthSm ? "100%" : "4rem",
+          padding: isWidthMd ? "100%" : "2rem",
         }}
       >
         <Typography variant="h4" fontWeight={700}>
