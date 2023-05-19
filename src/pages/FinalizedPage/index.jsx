@@ -1,18 +1,15 @@
-import { Box, Button, Typography, useMediaQuery } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { bindActionCreators } from "redux";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
-import { useTheme } from "@mui/material/styles";
 
 import { resetCount } from "../../store/actions";
 import { calcTotal, formatPrice } from "../../utils";
-import { Price } from "./styles";
+import { Price, StyledWrapper, StyledContentWrapper } from "./styles";
 import purchase from "../../assets/purchase.png";
 
 function FinalizedPage({ products, user, resetCount }) {
   const navigate = useNavigate();
-  const theme = useTheme();
-  const isWidthMd = useMediaQuery(theme.breakpoints.down("md"));
 
   const total = calcTotal(products);
 
@@ -21,28 +18,9 @@ function FinalizedPage({ products, user, resetCount }) {
     return navigate("/");
   }
 
-  let imageWidth = isWidthMd ? 140 : 180;
-
   return (
-    <Box
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "#F5F5F5",
-        height: "100vh",
-      }}
-    >
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          textAlign: "center",
-          backgroundColor: "white",
-          padding: isWidthMd ? "100%" : "2rem",
-        }}
-      >
+    <StyledWrapper>
+      <StyledContentWrapper>
         <Typography variant="h4" fontWeight={700}>
           {user.name},
         </Typography>
@@ -52,7 +30,7 @@ function FinalizedPage({ products, user, resetCount }) {
           foi finalizada com sucesso
         </Typography>
         <Box m={4} mr={2} alignItems="center">
-          <img src={purchase} alt="" width={imageWidth} />
+          <img src={purchase} alt="" />
         </Box>
         <Button
           size="large"
@@ -62,8 +40,8 @@ function FinalizedPage({ products, user, resetCount }) {
         >
           INICIAR NOVA COMPRA
         </Button>
-      </Box>
-    </Box>
+      </StyledContentWrapper>
+    </StyledWrapper>
   );
 }
 
